@@ -1,0 +1,23 @@
+# Raw footage and large local outputs
+uap_footage/
+uap_results/
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.zip
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Generated keyframes
+results/keyframes/
+*.png
+
+# OS/editor junk
+.DS_Store
+*.swp
+

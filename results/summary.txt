@@ -1,0 +1,66 @@
+UAP FOOTAGE ANALYSIS — PromptHound
+Date: 2026-05-22 14:14:23
+Files processed: 57
+Total anomalies flagged: 286
+Threshold used: 300000
+Frame skip: 10
+Cooldown: 5s
+
+Per-file results:
+video_2605_DOD_111719709_DOD_111719709.mp4: no anomalies detected
+video_2605_DOD_111719715_DOD_111719715.mp4: 4 anomalies | top spike: 607323 at 157.30s
+video_2605_DOD_111719718_DOD_111719718.mp4: 63 anomalies | top spike: 2073600 at 123.29s
+video_2605_DOD_111719723_DOD_111719723.mp4: no anomalies detected
+video_2605_DOD_111719726_DOD_111719726.mp4: 4 anomalies | top spike: 920907 at 212.97s
+video_2605_DOD_111719730_DOD_111719730.mp4: 2 anomalies | top spike: 645515 at 241.97s
+video_2605_DOD_111719732_DOD_111719732.mp4: no anomalies detected
+video_2605_DOD_111719736_DOD_111719736.mp4: 11 anomalies | top spike: 762658 at 265.97s
+video_2605_DOD_111719739_DOD_111719739.mp4: 15 anomalies | top spike: 1703741 at 62.63s
+video_2605_DOD_111719741_DOD_111719741.mp4: 22 anomalies | top spike: 912984 at 150.97s
+video_2605_DOD_111719746_DOD_111719746.mp4: 10 anomalies | top spike: 649228 at 253.30s
+video_2605_DOD_111719752_DOD_111719752.mp4: 4 anomalies | top spike: 1720657 at 70.30s
+video_2605_DOD_111719795_DOD_111719795.mp4: no anomalies detected
+video_2605_DOD_111719799_DOD_111719799.mp4: 7 anomalies | top spike: 743367 at 159.30s
+video_2605_DOD_111719800_DOD_111719800.mp4: 17 anomalies | top spike: 921600 at 46.30s
+video_2605_DOD_111719804_DOD_111719804.mp4: 5 anomalies | top spike: 762168 at 116.97s
+video_2605_DOD_111719807_DOD_111719807.mp4: 1 anomalies | top spike: 644456 at 30.63s
+video_2605_DOD_111719809_DOD_111719809.mp4: 4 anomalies | top spike: 740002 at 221.97s
+video_2605_DOD_111719813_DOD_111719813.mp4: 4 anomalies | top spike: 640812 at 95.97s
+video_2605_DOD_111719823_DOD_111719823.mp4: 12 anomalies | top spike: 760206 at 122.97s
+video_2605_DOD_111719828_DOD_111719828.mp4: 1 anomalies | top spike: 423340 at 256.97s
+video_2605_DOD_111719833_DOD_111719833.mp4: 4 anomalies | top spike: 495642 at 168.97s
+video_2605_DOD_111719835_DOD_111719835.mp4: 1 anomalies | top spike: 747448 at 103.97s
+video_2605_DOD_111719847_DOD_111719847.mp4: 1 anomalies | top spike: 757312 at 255.63s
+video_2605_DOD_111719850_DOD_111719850.mp4: 3 anomalies | top spike: 641204 at 50.30s
+video_2605_DOD_111719852_DOD_111719852.mp4: no anomalies detected
+video_2605_DOD_111720692_DOD_111720692.mp4: no anomalies detected
+video_2605_DOD_111720693_DOD_111720693.mp4: 3 anomalies | top spike: 815903 at 26.63s
+video_2605_DOD_111720696_DOD_111720696.mp4: 4 anomalies | top spike: 831203 at 189.63s
+video_2605_DOD_111720698_DOD_111720698.mp4: 1 anomalies | top spike: 706469 at 29.30s
+video_2605_DOD_111720700_DOD_111720700.mp4: 1 anomalies | top spike: 379438 at 19.97s
+video_2605_DOD_111720720_DOD_111720720.mp4: 3 anomalies | top spike: 901123 at 0.63s
+video_2605_DOD_111720731_DOD_111720731.mp4: 1 anomalies | top spike: 440610 at 24.63s
+video_2605_DOD_111720752_DOD_111720752.mp4: no anomalies detected
+video_2605_DOD_111720765_DOD_111720765.mp4: no anomalies detected
+video_2605_DOD_111720775_DOD_111720775.mp4: 16 anomalies | top spike: 855200 at 2.97s
+video_2605_DOD_111720809_DOD_111720809.mp4: 2 anomalies | top spike: 1199130 at 15.30s
+video_2605_DOD_111720822_DOD_111720822.mp4: no anomalies detected
+video_2605_DOD_111720827_DOD_111720827.mp4: 3 anomalies | top spike: 1335741 at 2.30s
+video_2605_DOD_111720830_DOD_111720830.mp4: 9 anomalies | top spike: 1690447 at 112.63s
+video_2605_DOD_111720843_DOD_111720843.mp4: 5 anomalies | top spike: 727107 at 59.30s
+video_2605_DOD_111720856_DOD_111720856.mp4: 6 anomalies | top spike: 748931 at 209.63s
+video_2605_DOD_111720857_DOD_111720857.mp4: 7 anomalies | top spike: 740725 at 241.97s
+video_2605_DOD_111720858_DOD_111720858.mp4: 2 anomalies | top spike: 552546 at 82.97s
+video_2605_DOD_111720861_DOD_111720861.mp4: no anomalies detected
+video_2605_DOD_111720883_DOD_111720883.mp4: 13 anomalies | top spike: 790390 at 133.97s
+video_2605_DOD_111720884_DOD_111720884.mp4: no anomalies detected
+video_2605_DOD_111720886_DOD_111720886.mp4: 4 anomalies | top spike: 437343 at 186.30s
+video_2605_DOD_111720890_DOD_111720890.mp4: no anomalies detected
+video_2605_DOD_111720899_DOD_111720899.mp4: 7 anomalies | top spike: 1673977 at 22.63s
+video_2605_DOD_111721693_DOD_111721693.mp4: no anomalies detected
+video_2605_DOD_111721698_DOD_111721698.mp4: no anomalies detected
+video_2605_DOD_111721711_DOD_111721711.mp4: no anomalies detected
+video_2605_DOD_111721737_DOD_111721737.mp4: 3 anomalies | top spike: 308862 at 191.16s
+video_2605_DOD_111721747_DOD_111721747.mp4: 1 anomalies | top spike: 2073600 at 211.18s
+video_2605_DOD_111721755_DOD_111721755.mp4: no anomalies detected
+video_2605_DOD_111721758_DOD_111721758.mp4: no anomalies detected
