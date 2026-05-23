@@ -26,3 +26,6 @@ reviewed_priority.jsonl
 # OS/editor junk
 .DS_Store
 *.swp
+
+# V3 generated outputs
+uap_results_v3/

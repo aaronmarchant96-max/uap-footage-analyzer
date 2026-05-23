@@ -1,5 +1,10 @@
 # UAP Footage Analyzer
 
+![Python](https://img.shields.io/badge/python-3.10%2B-blue)
+![OpenCV](https://img.shields.io/badge/OpenCV-motion%20analysis-green)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Status](https://img.shields.io/badge/status-experimental-orange)
+
 Experimental OpenCV based analysis pipeline for extracting high motion-delta events from publicly released DOD UAP footage datasets.
 
 ## Overview
@@ -38,7 +43,7 @@ Cooldown: 5 seconds
 ## Pipeline
 
 - `src/sky_residual_v3.py` — main V3 processor
-- `uap_processor.py` — V2 batch processor
+- `src/uap_processor_v2.py` — legacy V2 batch processor
 - `tools/make_priority_queue.py` — priority queue generator
 
 ## Docs
