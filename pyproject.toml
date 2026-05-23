@@ -1,13 +1,21 @@
-# Demo
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
 
-This folder is reserved for lightweight demonstration assets.
+[project]
+name = "uap-footage-analyzer"
+version = "0.1.0"
+description = "Experimental OpenCV pipeline for extracting high motion-delta events from publicly released UAP footage datasets."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+  { name = "Aaron Marchant" }
+]
+dependencies = [
+  "opencv-python",
+  "numpy"
+]
 
-The full raw footage dataset is not included in this repository because video files are large and should be obtained from the original public source.
-
-Recommended demo workflow:
-
-```text
-1. Place source footage in ~/uap_footage
-2. Run the V3 processor
-3. Review generated JSONL logs and keyframes
-4. Use the priority queue to inspect high scoring candidate events
+[project.scripts]
+uap-v3 = "src.sky_residual_v3:main"
