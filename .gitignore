@@ -1,6 +1,7 @@
 # Raw footage and large local outputs
 uap_footage/
 uap_results/
+uap_results_v3/
 *.mp4
 *.mov
 *.avi
@@ -17,7 +18,11 @@ venv/
 results/keyframes/
 *.png
 
+# Local review scratch files
+priority_review_list.jsonl
+reviewed_priority.jsonl
+*.log
+
 # OS/editor junk
 .DS_Store
 *.swp
-
