@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+src/uap_footage_analyzer/__init__.py
+src/uap_footage_analyzer/sky_residual_v3.py
+src/uap_footage_analyzer/uap_processor_v2.py
+src/uap_footage_analyzer.egg-info/PKG-INFO
+src/uap_footage_analyzer.egg-info/SOURCES.txt
+src/uap_footage_analyzer.egg-info/dependency_links.txt
+src/uap_footage_analyzer.egg-info/entry_points.txt
+src/uap_footage_analyzer.egg-info/requires.txt
+src/uap_footage_analyzer.egg-info/top_level.txt
