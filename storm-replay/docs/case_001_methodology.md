@@ -17,6 +17,12 @@ Review frame-to-frame visual change in a known outbreak window and log candidate
 - Labels emitted: `low_activity` only
 - Candidate review signal: not yet strong enough to separate storm cells with the current thresholding
 
+## Calibration Note
+
+The first pass labeled all 24 frames `low_activity`, which is being treated as a threshold calibration issue rather than a reason to force stronger storm labels.
+
+The goal here is to make the detector explain its scoring more clearly so the next calibration pass can adjust thresholds with evidence instead of guesswork.
+
 ## Interpretation
 
 This first pass is a format check and source check, not a performance claim.
