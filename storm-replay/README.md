@@ -2,6 +2,10 @@
 
 Storm Replay is a historical weather signal extraction prototype that reviews public storm imagery, logs candidate activity to JSONL, and compares visual signals against known event timelines for human review.
 
+## Beta Notice
+
+Storm Replay is for human review of storm imagery and radar context. It is not intended for forecasting, alerting, research, or safety decisions.
+
 ## MVP Goal
 
 Given a folder of historical weather frames, detect frame-to-frame visual changes, write candidate events to `data/events.jsonl`, create annotated frames, and generate a contact sheet for review.
