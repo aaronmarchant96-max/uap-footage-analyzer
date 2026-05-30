@@ -1,0 +1,26 @@
+{
+  "case_id": "colares-1977",
+  "title": "Colares UFO Flap – 1977",
+  "date": "1977-10",
+  "location": {
+    "region": "Colares",
+    "city": "Colares, Pará",
+    "coordinates": "-0.9333, -48.2833"
+  },
+  "event_type": "mass sighting + physical effects",
+  "summary": "Multiple witnesses in Colares reported being chased and attacked by glowing UFOs. Some suffered burns and radiation-like symptoms.",
+  "witnesses": "multiple (dozens reported)",
+  "media": {
+    "videos": [],
+    "images": ["colares-1977-witness.jpg", "colares-1977-sketch.jpg"],
+    "other": []
+  },
+  "source": {
+    "original_source": "Brazil UFO Leaks",
+    "credibility_notes": "Well-documented case with medical reports. High credibility.",
+    "registry_id": "brazil-colares-1977"
+  },
+  "tags": ["colares", "1977", "physical effects", "mass sighting", "burns"],
+  "notes": "One of the most significant Brazilian UFO cases. Multiple military and civilian witnesses. Some victims were reportedly hospitalized.",
+  "review_status": "pending"
+}

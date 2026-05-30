@@ -45,6 +45,7 @@ storm-replay/
 ├── src/
 │   ├── analyze_frames.py
 │   ├── annotate_frames.py
+│   ├── storm_replay_goes.py
 │   └── contact_sheet.py
 └── docs/
     ├── methodology.md
@@ -55,6 +56,7 @@ storm-replay/
 
 - `src/analyze_frames.py`: reads frame sequences, detects visual change, and emits candidate labels.
 - `src/annotate_frames.py`: writes annotated review frames with timestamps and scores.
+- `src/storm_replay_goes.py`: GOES-16 calibration module with pure helpers, Case 001 thresholds, and JSONL logging.
 - `src/contact_sheet.py`: builds a compact visual summary of flagged frames.
 - `docs/methodology.md`: explains the replay method and what it does not claim.
 - `docs/case_001_plan.md`: defines the first historical replay target and validation questions.

@@ -1,0 +1,63 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-05-29",
+  "description": "Central registry of all UAP data sources. This file is the source of truth for provenance, credibility, and processing configuration.",
+  "sources": [
+    {
+      "source_id": "dod-2026-05",
+      "name": "DOD UAP Footage Release - May 2026",
+      "type": "video",
+      "region": "United States",
+      "date_range": "2026-05",
+      "provenance": {
+        "origin": "U.S. Department of Defense public release",
+        "url": "https://www.defense.gov/News/News-Stories/",
+        "release_type": "official_public_release",
+        "classification": "unclassified"
+      },
+      "credibility": {
+        "level": "high",
+        "notes": "Official government release. Chain of custody assumed strong. Video authenticity considered high."
+      },
+      "processing": {
+        "status": "processed_v3",
+        "ingested": true,
+        "detector_run": "sky_residual_v3",
+        "thresholds": {
+          "motion_delta": 300000,
+          "frame_skip": 10,
+          "cooldown_seconds": 5
+        }
+      },
+      "local_path": "data/dod/2026-05/",
+      "media_count": 57,
+      "notes": "Primary dataset for V3 development. Used for residual analysis validation."
+    },
+    {
+      "source_id": "brazil-leak-001",
+      "name": "Brazil UFO Leaks - [To Be Named]",
+      "type": "video",
+      "region": "Brazil",
+      "date_range": null,
+      "provenance": {
+        "origin": "Brazilian government / military / police leak or release",
+        "url": null,
+        "release_type": "leak",
+        "classification": "unknown"
+      },
+      "credibility": {
+        "level": "medium",
+        "notes": "Source-specific credibility assessment pending ingestion and analysis. Capture conditions and chain of custody unknown."
+      },
+      "processing": {
+        "status": "pending_ingestion",
+        "ingested": false,
+        "detector_run": null,
+        "thresholds": null
+      },
+      "local_path": "data/brazil/",
+      "media_count": null,
+      "notes": "Placeholder entry. Update with real provenance once material is added."
+    }
+  ]
+}

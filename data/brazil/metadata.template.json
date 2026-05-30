@@ -1,0 +1,29 @@
+{
+  "_comment": "This is a template for per-case metadata.json files. Copy and fill it out for each Brazil case.",
+  "_schema_version": "1.0",
+
+  "case_id": "kebab-case-unique-id (required)",
+  "title": "Human-readable title of the case",
+  "date": "YYYY-MM-DD or approximate (e.g. 1977-10)",
+  "location": {
+    "region": "Primary region (e.g. Colares, São Paulo)",
+    "city": "City or town (optional)",
+    "coordinates": "lat,lon (optional, e.g. -0.9333, -48.2833)"
+  },
+  "event_type": "sighting | encounter | landing | abduction | mass sighting | physical effects | other",
+  "summary": "Short 1-3 sentence description of what happened",
+  "witnesses": "Number or description (e.g. 5, 'dozens', 'multiple')",
+  "media": {
+    "videos": ["filename1.mp4", "filename2.mov"],
+    "images": ["photo1.jpg", "sketch1.png"],
+    "other": ["document.pdf", "report.txt"]
+  },
+  "source": {
+    "original_source": "Brazil UFO Leaks | Personal archive | Military report | etc.",
+    "credibility_notes": "Any notes on reliability, chain of custody, or concerns",
+    "registry_id": "Optional link to the entry in data/metadata/sources.json"
+  },
+  "tags": ["colares", "1977", "physical-effects", "mass-sighting"],
+  "notes": "Freeform notes, observations, context, or things to watch for during review",
+  "review_status": "pending | reviewed | needs_more_info | low_quality"
+}

@@ -19,6 +19,7 @@ dependencies = [
 
 [project.scripts]
 uap-v3 = "uap_footage_analyzer.sky_residual_v3:main"
+uap-ingest = "uap_footage_analyzer.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

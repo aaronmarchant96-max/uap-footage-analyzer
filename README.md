@@ -59,6 +59,12 @@ Cooldown: 5 seconds
 pip install opencv-python
 \```
 
+## Multi-Source Direction (2026+)
+
+The project is expanding beyond DOD-only releases. Future work will treat different sources (DOD, Brazilian leaks, others) as parallel inputs that feed a shared normalized pipeline.
+
+See `data/README.md` for the current data organization philosophy and `data/metadata/sources.json` for the registry.
+
 ## Disclaimer
 
 This tool identifies motion events for manual review. It does not classify objects or make claims about UAP origin.
