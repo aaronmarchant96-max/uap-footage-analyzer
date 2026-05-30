@@ -172,7 +172,7 @@ def build_threshold_notes(summary: dict[str, float], label_counts: Counter[str])
         )
     else:
         notes.append(
-            f"Motion scores reach the review band, so the current thresholds are at least sensitive enough to surface candidates."
+            "Motion scores reach the review band, so the current thresholds are at least sensitive enough to surface candidates."
         )
 
     if intensity_max < INTENSITY_HIGH_THRESHOLD:

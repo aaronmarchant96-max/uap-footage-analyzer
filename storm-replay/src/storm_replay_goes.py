@@ -333,7 +333,7 @@ def build_threshold_notes(summary: dict[str, Any], label_counts: Counter[str], t
         )
     elif motion_max < thresholds["motion_medium_threshold"]:
         notes.append(
-            f"Motion scores stay below the review threshold, so the detector remains conservative."
+            "Motion scores stay below the review threshold, so the detector remains conservative."
         )
     else:
         notes.append("Motion scores reach the review band, so threshold calibration is surfacing candidates.")
