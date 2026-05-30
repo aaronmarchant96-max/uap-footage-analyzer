@@ -11,7 +11,12 @@ import json
 
 
 def get_repo_root() -> Path:
-    """Return the repository root (assumes this file is in src/uap_footage_analyzer/)."""
+    """Return the repository root.
+
+    This is a bit heuristic. In production it assumes the package lives in
+    src/uap_footage_analyzer/. In tests you should usually pass an explicit
+    repo_root to load_sources_registry().
+    """
     return Path(__file__).resolve().parents[3]
 
 

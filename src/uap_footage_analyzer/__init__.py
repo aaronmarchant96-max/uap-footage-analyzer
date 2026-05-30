@@ -20,6 +20,7 @@ from .registry import (
     get_all_sources,
 )
 from .queue_io import load_review_queue, save_review_queue
+from .detection import run_detection_on_case, run_on_case
 
 __all__ = [
     "NormalizedCase",
@@ -35,4 +36,6 @@ __all__ = [
     "get_all_sources",
     "load_review_queue",
     "save_review_queue",
+    "run_detection_on_case",
+    "run_on_case",
 ]

@@ -7,7 +7,6 @@ after ingestion. This is the contract between source adapters and the core pipel
 
 from dataclasses import dataclass, field
 from typing import List, Optional, Dict, Any
-from datetime import datetime
 from enum import Enum
 
 
