@@ -29,3 +29,19 @@ reviewed_priority.jsonl
 
 # V3 generated outputs
 uap_results_v3/
+
+# Personal environment / direnv
+.envrc
+.env
+.env.*
+
+# Python packaging artifacts (should not be committed)
+*.egg-info/
+build/
+dist/
+
+# Experimental / separate projects (add back only if you want them tracked)
+goes_anomaly_hunter/
+
+# Personal one-off scripts
+review_priority.py

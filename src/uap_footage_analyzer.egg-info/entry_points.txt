@@ -1,2 +1,0 @@
-[console_scripts]
-uap-v3 = uap_footage_analyzer.sky_residual_v3:main
