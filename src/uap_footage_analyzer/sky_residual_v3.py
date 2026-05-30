@@ -7,6 +7,24 @@ Purpose:
     and write a structured residual review queue.
 
 This script does not classify origin. It only assigns conservative review labels.
+
+=============================================================================
+CURRENT INTEGRATION STATUS (May 2026)
+=============================================================================
+This module is the core detection engine. It was originally developed and
+tuned against DOD-style UAP footage (see V3 results).
+
+It is **not yet** fully integrated with the new multi-source ingestion layer:
+- It does not currently consume `NormalizedCase` objects directly.
+- Source-specific configuration (thresholds, expected artifacts) is still
+  mostly hardcoded or passed via CLI args rather than coming from the registry.
+
+Work is planned to make the detector source-aware using `SourceConfig`
+from the new schemas. Until then, when running on non-DOD material,
+manual adjustment of parameters is expected.
+
+See README.md → "Current Integration Status" for the broader picture.
+=============================================================================
 """
 
 from __future__ import annotations

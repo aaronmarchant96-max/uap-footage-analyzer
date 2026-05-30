@@ -138,9 +138,9 @@ for video_file in video_files:
     if not ret:
 
         print(
-            f"[SKIP] "
-            f"Could not read "
-            f"first frame"
+            "[SKIP] "
+            "Could not read "
+            "first frame"
         )
 
         cap.release()
