@@ -10,11 +10,12 @@ from uap_footage_analyzer.adapters.brazil import (
     load_case_metadata,
     scan_brazil_cases,
 )
+from uap_footage_analyzer.schemas import SourceConfig
 
 
 @pytest.fixture
 def brazil_source():
-    """Minimal Brazil source entry for testing."""
+    """Minimal Brazil source entry for testing (with sample processing thresholds)."""
     return {
         "source_id": "brazil-test",
         "name": "Test Brazil Source",
@@ -26,6 +27,13 @@ def brazil_source():
         "credibility": {
             "level": "medium",
             "notes": "Test note",
+        },
+        "processing": {
+            "thresholds": {
+                "motion_delta": 123456,
+                "frame_skip": 5,
+                "cooldown_seconds": 3,
+            }
         },
     }
 
@@ -77,7 +85,15 @@ def test_scan_brazil_cases_creates_normalized_cases(tmp_path: Path, brazil_sourc
     case2 = tmp_path / "empty-case"
     case2.mkdir()  # No media files
 
-    cases = scan_brazil_cases(tmp_path, brazil_source)
+    # Manually build source_config like the run() does, since this test calls scan directly
+    proc = brazil_source.get("processing", {}) or {}
+    thresh = proc.get("thresholds") or {}
+    source_config = SourceConfig(
+        motion_delta_threshold=thresh.get("motion_delta"),
+        frame_skip=thresh.get("frame_skip") or 10,
+        cooldown_seconds=thresh.get("cooldown_seconds") or 5,
+    )
+    cases = scan_brazil_cases(tmp_path, brazil_source, source_config=source_config)
 
     # Only case1 should be included
     assert len(cases) == 1
@@ -85,6 +101,9 @@ def test_scan_brazil_cases_creates_normalized_cases(tmp_path: Path, brazil_sourc
     assert c.case_id == "colares-1977"
     assert c.source_id == "brazil-test"
     assert c.region == "Colares"
+    assert c.source_config is not None
+    assert c.source_config.motion_delta_threshold == 123456
+    assert c.source_config.frame_skip == 5
 
 
 def test_load_case_metadata_handles_malformed_json(tmp_path: Path):

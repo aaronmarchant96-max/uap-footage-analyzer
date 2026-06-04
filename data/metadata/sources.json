@@ -52,8 +52,12 @@
       "processing": {
         "status": "pending_ingestion",
         "ingested": false,
-        "detector_run": null,
-        "thresholds": null
+        "detector_run": "sky_residual_v3",
+        "thresholds": {
+          "motion_delta": 250000,
+          "frame_skip": 8,
+          "cooldown_seconds": 4
+        }
       },
       "local_path": "data/brazil/",
       "media_count": null,

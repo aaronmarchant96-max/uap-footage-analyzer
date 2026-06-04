@@ -13,10 +13,15 @@ import json
 def get_repo_root() -> Path:
     """Return the repository root.
 
-    This is a bit heuristic. In production it assumes the package lives in
-    src/uap_footage_analyzer/. In tests you should usually pass an explicit
-    repo_root to load_sources_registry().
+    Walk up from the current file until we find a data/metadata/sources.json .
+    This is robust for editable installs, PYTHONPATH=src, and tests.
     """
+    p = Path(__file__).resolve()
+    for _ in range(6):  # safety
+        if (p / "data" / "metadata" / "sources.json").exists():
+            return p
+        p = p.parent
+    # fallback to old heuristic
     return Path(__file__).resolve().parents[3]
 
 

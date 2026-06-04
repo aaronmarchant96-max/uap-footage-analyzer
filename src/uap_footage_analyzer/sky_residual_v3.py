@@ -9,21 +9,21 @@ Purpose:
 This script does not classify origin. It only assigns conservative review labels.
 
 =============================================================================
-CURRENT INTEGRATION STATUS (May 2026)
+CURRENT INTEGRATION STATUS (post-wiring)
 =============================================================================
 This module is the core detection engine. It was originally developed and
 tuned against DOD-style UAP footage (see V3 results).
 
-It is **not yet** fully integrated with the new multi-source ingestion layer:
-- It does not currently consume `NormalizedCase` objects directly.
-- Source-specific configuration (thresholds, expected artifacts) is still
-  mostly hardcoded or passed via CLI args rather than coming from the registry.
+It is now wired via detection.run_detection_on_case:
+- Accepts NormalizedCase
+- Uses case.source_config (populated from registry via build_source_config_from_registry
+  in create_* helpers and Brazil adapter) to set motion_threshold, frame_skip,
+  cooldown_sec etc in the cfg passed to process_video.
+- For Brazil + DOD cases (and any carrying source_config).
 
-Work is planned to make the detector source-aware using `SourceConfig`
-from the new schemas. Until then, when running on non-DOD material,
-manual adjustment of parameters is expected.
-
-See README.md → "Current Integration Status" for the broader picture.
+See README.md "Current Integration Status" for details. Source-aware config
+for Brazil and DOD is active; deeper per-source artifact profiles etc. can
+be extended in SourceConfig and score_explanations/classify_event.
 =============================================================================
 """
 

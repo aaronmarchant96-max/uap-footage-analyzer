@@ -2,22 +2,26 @@
 
 This folder is reserved for lightweight demonstration assets.
 
-The full raw footage dataset is not included in this repository because video files are large and should be obtained from the original public source.
+## Easiest Way to Prove the Pipeline Works
 
-## Recommended Demo Workflow
+Run this single command from the repository root (after `pip install -e .` if desired):
 
-1. Place source footage in `~/uap_footage`
-2. Run the V3 processor
-3. Review generated JSONL logs and keyframes
-4. Use the priority queue to inspect high scoring candidate events
+```bash
+python tools/demo_brazil_pipeline.py
+```
 
-## Future Demo Assets
+This script:
+- Creates completely synthetic Brazil case data in a temporary directory
+- Runs the full Brazil ingestion adapter
+- Produces real `NormalizedCase` objects
+- Writes a normalized review queue
+- Loads it back and prints a human-readable summary
 
-Future versions may include:
+No external data or complicated setup required. Perfect for quick validation or demos.
 
-- synthetic input clip
-- short output GIF
-- sample contact sheet
-- annotated screenshot
+## Other Demo Options
 
-No object origin claims are made from demo outputs. The tool only extracts candidate motion events for manual review.
+- `uap-ingest brazil --dry-run --verbose` (after `pip install -e .`)
+- `python -m pytest tests/ -q` (run the full test suite)
+
+The full raw footage datasets are intentionally **not** included (they are large and should be obtained from official public sources).

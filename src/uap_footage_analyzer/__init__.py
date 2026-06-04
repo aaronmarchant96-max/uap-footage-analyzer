@@ -13,6 +13,7 @@ from .schemas import (
     ProcessingStatus,
     create_dod_case,
     create_brazil_case,
+    build_source_config_from_registry,
 )
 from .registry import (
     load_sources_registry,
@@ -31,6 +32,7 @@ __all__ = [
     "ProcessingStatus",
     "create_dod_case",
     "create_brazil_case",
+    "build_source_config_from_registry",
     "load_sources_registry",
     "get_source",
     "get_all_sources",

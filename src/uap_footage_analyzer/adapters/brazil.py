@@ -6,11 +6,11 @@ producing NormalizedCase objects.
 """
 
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 import json
 
 from ..registry import load_sources_registry, get_source
-from ..schemas import NormalizedCase, Provenance, Credibility, CredibilityLevel, ProcessingStatus
+from ..schemas import NormalizedCase, Provenance, Credibility, CredibilityLevel, ProcessingStatus, SourceConfig
 from ..queue_io import save_review_queue
 
 
@@ -39,7 +39,7 @@ def load_case_metadata(case_dir: Path) -> Dict[str, Any]:
     return {}
 
 
-def scan_brazil_cases(brazil_root: Path, brazil_source: dict) -> List[NormalizedCase]:
+def scan_brazil_cases(brazil_root: Path, brazil_source: dict, source_config: Optional[SourceConfig] = None) -> List[NormalizedCase]:
     """Scan a Brazil root directory and return NormalizedCase objects."""
     cases: List[NormalizedCase] = []
 
@@ -79,6 +79,7 @@ def scan_brazil_cases(brazil_root: Path, brazil_source: dict) -> List[Normalized
             provenance=provenance,
             credibility=credibility,
             processing_status=ProcessingStatus.PENDING_INGESTION,
+            source_config=source_config,
             metadata=meta.get("metadata", {}),
         )
         cases.append(case)
@@ -101,11 +102,20 @@ def run(
     except KeyError:
         raise RuntimeError("brazil-leak-001 not found in registry. Update data/metadata/sources.json first.")
 
+    # Build SourceConfig from registry thresholds so detector can use it
+    proc = brazil_source.get("processing", {}) or {}
+    thresh = proc.get("thresholds") or {}
+    source_config = SourceConfig(
+        motion_delta_threshold=thresh.get("motion_delta"),
+        frame_skip=thresh.get("frame_skip") or 10,
+        cooldown_seconds=thresh.get("cooldown_seconds") or 5,
+    )
+
     if verbose:
         print(f"Scanning Brazil material under: {input_dir}")
         print(f"Using source: {brazil_source['name']}")
 
-    cases = scan_brazil_cases(input_dir, brazil_source)
+    cases = scan_brazil_cases(input_dir, brazil_source, source_config=source_config)
 
     if not cases:
         print("No Brazil cases found with media files.")

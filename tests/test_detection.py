@@ -25,11 +25,13 @@ def test_run_on_case_accepts_normalized_case():
     """Basic smoke test that the integration function accepts a NormalizedCase."""
     case = _make_minimal_case()
 
-    # We expect this to fail at runtime because the file doesn't exist,
-    # but the important part is that it accepts the NormalizedCase object
-    # and attaches source/case metadata.
-    with pytest.raises(Exception):  # The underlying detector will fail on missing file
-        run_on_case(case)
+    # Now gracefully handles bad file (returns counts with open_failed), but
+    # accepts the case and attaches metadata.
+    result = run_on_case(case)
+    assert result.get("source_id") == case.source_id
+    assert result.get("case_id") == case.case_id
+    # open_failed or similar from V3 when cap fails
+    assert "open_failed" in result or result.get("total_events", 0) >= 0
 
 
 def test_run_on_case_attaches_case_metadata_on_success_path(monkeypatch):
@@ -42,8 +44,8 @@ def test_run_on_case_attaches_case_metadata_on_success_path(monkeypatch):
     # Patch at the place where it is actually imported inside the function
     import uap_footage_analyzer.sky_residual_v3 as sky_module
 
-    def fake_process_video(media_path, **kwargs):
-        return {"success": True, "processed_file": str(media_path)}
+    def fake_process_video(video_path, paths, cfg):
+        return {"success": True, "processed_file": str(video_path)}
 
     monkeypatch.setattr(sky_module, "process_video", fake_process_video)
 

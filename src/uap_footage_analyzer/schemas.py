@@ -9,6 +9,8 @@ from dataclasses import dataclass, field
 from typing import List, Optional, Dict, Any
 from enum import Enum
 
+from .registry import load_sources_registry, get_source
+
 
 class CredibilityLevel(str, Enum):
     HIGH = "high"
@@ -53,6 +55,40 @@ class SourceConfig:
     cooldown_seconds: int = 5
     expected_artifacts: List[str] = field(default_factory=list)  # e.g. ["compression", "lens_flare", "sensor_noise"]
     notes: str = ""
+
+
+def build_source_config_from_registry(
+    source_id: str,
+    registry: Optional[Dict[str, Any]] = None,
+    source_dict: Optional[Dict[str, Any]] = None,
+) -> SourceConfig:
+    """Build SourceConfig from registry entry or explicit source_dict (for thresholds).
+
+    Falls back to defaults if no thresholds info available. Used to wire NormalizedCase
+    source_config into the detector.
+    """
+    thresh: Dict[str, Any] = {}
+    if source_dict:
+        proc = source_dict.get("processing", {}) or {}
+        thresh = proc.get("thresholds") or {}
+    else:
+        try:
+            if registry is None:
+                registry = load_sources_registry()
+            src = get_source(source_id, registry)
+            proc = src.get("processing", {}) or {}
+            thresh = proc.get("thresholds") or {}
+        except Exception:
+            pass
+
+    defaults = SourceConfig()
+    return SourceConfig(
+        motion_delta_threshold=thresh.get("motion_delta", defaults.motion_delta_threshold),
+        frame_skip=thresh.get("frame_skip", defaults.frame_skip),
+        cooldown_seconds=thresh.get("cooldown_seconds", defaults.cooldown_seconds),
+        expected_artifacts=thresh.get("expected_artifacts", defaults.expected_artifacts) or [],
+        notes=thresh.get("notes", defaults.notes) or "",
+    )
 
 
 @dataclass
@@ -131,9 +167,12 @@ class NormalizedCase:
 def create_dod_case(
     case_id: str,
     media_paths: List[str],
+    source_config: Optional["SourceConfig"] = None,
     **kwargs
 ) -> NormalizedCase:
     """Helper to create a NormalizedCase for DOD sources with sensible defaults."""
+    if source_config is None:
+        source_config = build_source_config_from_registry("dod-2026-05")
     return NormalizedCase(
         source_id="dod-2026-05",
         case_id=case_id,
@@ -147,6 +186,7 @@ def create_dod_case(
             level=CredibilityLevel.HIGH,
             notes="Official government release"
         ),
+        source_config=source_config,
         **kwargs
     )
 
@@ -155,9 +195,12 @@ def create_brazil_case(
     case_id: str,
     media_paths: List[str],
     credibility_level: CredibilityLevel = CredibilityLevel.MEDIUM,
+    source_config: Optional["SourceConfig"] = None,
     **kwargs
 ) -> NormalizedCase:
     """Helper for Brazilian sources (adjust credibility as material is assessed)."""
+    if source_config is None:
+        source_config = build_source_config_from_registry("brazil-leak-001")
     return NormalizedCase(
         source_id="brazil-leak-001",
         case_id=case_id,
@@ -171,5 +214,6 @@ def create_brazil_case(
             level=credibility_level,
             notes="Source-specific credibility assessment pending detailed review."
         ),
+        source_config=source_config,
         **kwargs
     )

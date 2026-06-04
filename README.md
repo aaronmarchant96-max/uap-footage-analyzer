@@ -44,10 +44,11 @@ See `data/README.md` for the data organization model and `data/metadata/sources.
 - Ability to ingest new sources and produce consistent review queues
 - Legacy V3 residual + motion detector (battle-tested on DOD data)
 
-**What is not yet integrated:**
-- The new ingestion layer (NormalizedCase + adapters) is only lightly wired into the core detector via the new `detection.py` module (`run_on_case` / `run_detection_on_case`).
-- Full source-aware configuration (pulling thresholds and expected artifacts from `SourceConfig` / the registry) is not yet implemented.
-- `sky_residual_v3.py` is still primarily tuned and documented against DOD-style footage.
+**What is now integrated (minimal wiring complete):**
+- NormalizedCase + SourceConfig from registry now drive the V3 detector via run_detection_on_case (for Brazil and DOD cases; thresholds like motion_delta, frame_skip, cooldown_seconds are applied).
+- The new ingestion layer produces cases with source_config attached (via adapter and create_* helpers).
+- Full per-source config for all detector params and deeper integration is still evolving, but the architecture claim is now real for the requested cases.
+- `sky_residual_v3.py` remains primarily tuned against DOD-style footage; other sources use registry-provided or default thresholds.
 
 This is intentional for now. We are prioritizing getting real multi-source data cleanly into the system before tightly coupling the detector. Full source-aware detection configuration is planned as the next major phase.
 

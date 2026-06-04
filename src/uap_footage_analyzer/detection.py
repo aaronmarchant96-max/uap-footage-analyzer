@@ -7,10 +7,11 @@ where source-aware behavior can be added over time without immediately
 refactoring the legacy detector code.
 """
 
+from collections import Counter
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Any, Dict
 
-from .schemas import NormalizedCase
+from .schemas import NormalizedCase, SourceConfig
 
 
 def run_detection_on_case(
@@ -21,48 +22,62 @@ def run_detection_on_case(
     """
     Run detection on a NormalizedCase.
 
-    Currently this is a very thin wrapper around the V3 engine.
-    It extracts media paths from the case and passes them through.
+    Wires NormalizedCase.source_config (if present) into the V3 detector's cfg
+    so that source-specific thresholds from the registry drive the run.
+    Builds per-case output paths.
 
-    Future work: pull SourceConfig from the registry (or the case itself)
-    and apply source-specific thresholds / artifact profiles.
+    Supports Brazil and DOD cases (and any with source_config attached).
 
     Args:
         case: A NormalizedCase (must have at least one media path)
-        output_dir: Optional directory to write results
-        **override_kwargs: Any parameters to pass through to the V3 runner
+        output_dir: Optional base directory; will be scoped under source/case_id
+        **override_kwargs: Extra cfg overrides (applied after source_config)
 
     Returns:
-        The result dict from the underlying detector (for now).
+        Dict with counts + source_id, case_id, output_dir, cfg_used.
     """
     if not case.media_paths:
         raise ValueError(f"Case {case.case_id} has no media paths")
 
-    # For now we just take the first media path (common pattern in the old code)
-    # In a more mature version we would handle multiple files per case.
     primary_media = Path(case.media_paths[0])
 
-    # TODO: In the future, resolve SourceConfig from registry using case.source_id
-    # and merge with any override_kwargs.
-    _ = case.source_config  # placeholder for future source-aware logic
+    # Lazy imports
+    from .sky_residual_v3 import process_video, reset_output_dir, DEFAULTS
 
-    # Lazy import to avoid circular imports and heavy dependencies at package load time
-    from .sky_residual_v3 import process_video
+    # Per-case output dir (prevents clobber; creates the standard v3 layout)
+    if output_dir is None:
+        output_dir = Path("uap_results") / case.source_id / case.case_id
+    paths = reset_output_dir(output_dir)
 
-    # Build kwargs, letting source_config influence defaults later
-    kwargs = {
-        "output_dir": output_dir,
-        **override_kwargs,
-    }
+    # Start from defaults, then apply source_config from the case (wired from registry)
+    cfg: Dict[str, Any] = dict(DEFAULTS)
+    if case.source_config:
+        sc: SourceConfig = case.source_config
+        if sc.motion_delta_threshold is not None:
+            cfg["motion_threshold"] = sc.motion_delta_threshold
+            cfg["pixel_delta_threshold"] = sc.motion_delta_threshold
+        if sc.frame_skip is not None:
+            cfg["frame_skip"] = sc.frame_skip
+        if sc.cooldown_seconds is not None:
+            cfg["cooldown_sec"] = sc.cooldown_seconds
+        if sc.expected_artifacts:
+            cfg["expected_artifacts"] = list(sc.expected_artifacts)
 
-    # Current behavior: just call the V3 engine on the primary media
-    # This is intentionally minimal so we can evolve it cleanly.
-    result = process_video(primary_media, **kwargs)
+    # Overrides win
+    cfg.update(override_kwargs)
 
-    # We could attach the case_id and source_id to the result here
-    if isinstance(result, dict):
-        result.setdefault("source_id", case.source_id)
-        result.setdefault("case_id", case.case_id)
+    result = process_video(primary_media, paths, cfg)
+
+    # Normalize to dict (process_video returns Counter of label counts)
+    if isinstance(result, Counter):
+        result = dict(result)
+    elif not isinstance(result, dict):
+        result = {"raw_counts": result}
+
+    result.setdefault("source_id", case.source_id)
+    result.setdefault("case_id", case.case_id)
+    result["output_dir"] = str(output_dir)
+    result["cfg_used"] = cfg
 
     return result
 
