@@ -1,3 +1,8 @@
+<!--
+CARDO REI methodology applied to this document.
+Reference: [CARDO REI Methodology](PROMPTHOUND-DOCS/CARDO-REI.md)
+-->
+
 # UAP Footage Analyzer
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
@@ -5,7 +10,9 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Status](https://img.shields.io/badge/status-experimental-orange)
 
-A multi-source framework for ingesting, normalizing, and analyzing UAP footage from different origins using computer vision and structured review workflows.
+A computer-vision pipeline for extracting reviewable motion events from UAP footage.
+
+It ingests multiple sources through a single normalized case model, so the archive stays consistent even when the raw footage formats change.
 
 ## Overview
 
@@ -36,7 +43,7 @@ Review Queues + Human Analysis
 
 See `data/README.md` for the data organization model and `data/metadata/sources.json` for the current registry.
 
-## Current Integration Status (as of late May 2026)
+## Current Integration Status (as of June 2026)
 
 **What is working well:**
 - Strong normalized data model (`NormalizedCase`)
@@ -113,7 +120,7 @@ All raw material lives under `data/<source>/`.
 
 See `data/README.md` for the full philosophy and how to add new sources.
 
-## Current Status (as of May 2026)
+## Current Status (as of June 2026)
 
 - Strong normalized data model and ingestion path for new sources
 - Mature V3 residual detection pipeline (originally tuned on DOD 2026-05 release)
