@@ -1,3 +1,8 @@
+<!--
+CARDO REI methodology applied to this document.
+Reference: [CARDO REI Methodology](PROMPTHOUND-DOCS/CARDO-REI.md)
+-->
+
 # Storm Replay
 
 > **Note:** Storm Replay is a semi-independent sub-project within the UAP Footage Analyzer repository. While it shares some GOES-related utilities, it has its own scope, methodology, and non-goals (see below). It is not part of the core UAP motion/residual detection pipeline.

@@ -1,3 +1,8 @@
+<!--
+CARDO REI methodology applied to this document.
+Reference: [CARDO REI Methodology](PROMPTHOUND-DOCS/CARDO-REI.md)
+-->
+
 # Brazil UAP Leaks / Releases
 
 This directory will contain material from Brazilian government, military, or police UAP-related leaks and official releases.

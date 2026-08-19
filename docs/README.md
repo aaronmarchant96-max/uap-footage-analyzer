@@ -1,3 +1,8 @@
+<!--
+CARDO REI methodology applied to this document.
+Reference: [CARDO REI Methodology](PROMPTHOUND-DOCS/CARDO-REI.md)
+-->
+
 # Documentation
 
 This folder contains historical and technical documentation, much of it originally written around the DOD V3 pipeline.
