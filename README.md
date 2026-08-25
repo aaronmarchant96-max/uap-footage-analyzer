@@ -3,7 +3,9 @@ CARDO REI methodology applied to this document.
 Reference: [CARDO REI Methodology](PROMPTHOUND-DOCS/CARDO-REI.md)
 -->
 
-# UAP Footage Analyzer
+# [ARCHIVED] UAP Footage Analyzer
+
+> **Status:** This is a historical experimental project kept for reference. The repository itself is active for archival purposes, but the project is no longer in active development.
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![OpenCV](https://img.shields.io/badge/OpenCV-motion%20analysis-green)
