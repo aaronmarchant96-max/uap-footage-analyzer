@@ -1,6 +1,6 @@
 <!--
 CARDO REI methodology applied to this document.
-Reference: [CARDO REI Methodology](PROMPTHOUND-DOCS/CARDO-REI.md)
+Reference: [CARDO REI Methodology](https://github.com/aaronmarchant96-max/llm-adversarial-testing/blob/main/PROMPTHOUND-DOCS/CARDO-REI.md)
 -->
 
 # [ARCHIVED] UAP Footage Analyzer
