@@ -46,6 +46,12 @@ keyframes/all_candidates/
 keyframes/residual_review/
 ```
 
+A separate helper can create:
+
+```text
+v3_priority_review_queue.jsonl
+```
+
 ## Metrics
 
 Each detected event receives local video metrics:
@@ -62,9 +68,26 @@ phase_response
 blockiness_score
 ```
 
-## False positive suppression labels
+## Candidate event criteria
 
-V3 attempts to identify common false positive causes:
+An event enters `v3_events.jsonl` when the frame difference count crosses the configured motion threshold and the cooldown window allows a new event.
+
+The default V3 criteria are:
+
+```text
+motion_threshold: 300000
+pixel_delta_threshold: 25
+frame_skip: 10
+cooldown_sec: 5.0
+```
+
+This means V3 compares sampled frames, counts changed pixels above the pixel delta threshold, records an event if the motion score is high enough, then waits at least 5 seconds before recording another event from the same video.
+
+## Labeled false positive criteria
+
+V3 treats an event as a labeled false positive when local video metrics strongly match a known video or sensor level explanation.
+
+Current automatic false positive labels are:
 
 ```text
 scene_cut
@@ -73,12 +96,117 @@ camera_motion_or_tracking_shift
 compression_artifact
 ```
 
-If no strong known explanation is found, the event receives one of these review labels:
+### scene_cut
+
+Assigned when the scene cut score is above the configured threshold and the changed area is large enough.
+
+Default criteria:
+
+```text
+scene_cut_score >= 0.75
+motion_area_ratio >= 0.45
+```
+
+This is meant to catch hard cuts, feed changes, or large scene replacements.
+
+### full_frame_brightness_shift
+
+Assigned when a broad brightness change explains the motion event.
+
+Default criteria:
+
+```text
+full_frame_brightness_shift_score >= 0.75
+```
+
+This is meant to catch IR exposure changes, gain shifts, bloom, glare, or sensor mode changes.
+
+### camera_motion_or_tracking_shift
+
+Assigned when phase correlation suggests the frame moved as a whole rather than only one object moving inside the frame.
+
+Default criteria:
+
+```text
+camera_motion_score >= 0.65
+```
+
+This is meant to catch panning, tracking shifts, stabilization jumps, and whole-frame movement.
+
+### compression_artifact
+
+Assigned when blockiness and motion area indicate a possible encoding or frame artifact.
+
+Default criteria:
+
+```text
+compression_artifact_score >= 0.55
+```
+
+This is meant to catch compression bursts, block artifacts, corrupted frames, or bitrate related distortion.
+
+## Residual candidate criteria
+
+If no known false positive label is assigned, the event is retained for manual review.
+
+V3 uses two residual review labels:
 
 ```text
 interesting_motion
 residual_unexplained
 ```
+
+### interesting_motion
+
+Assigned when the event is not strongly explained by a current false positive filter, but the residual score is below the high residual threshold.
+
+This still requires human review, but it is not the strongest residual category.
+
+### residual_unexplained
+
+Assigned when no known local explanation is found and the residual score is above the configured threshold.
+
+Default criteria:
+
+```text
+known_explanation is null
+residual_score >= 0.65
+```
+
+This label does not mean the object is truly unexplained. It only means current V3 local filters did not explain the event.
+
+## Priority queue criteria
+
+The priority queue is a narrower human review queue created from residual candidates.
+
+The current helper selects events where:
+
+```text
+label is interesting_motion or residual_unexplained
+motion_score > 800000
+```
+
+Those selected events are written to:
+
+```text
+v3_priority_review_queue.jsonl
+```
+
+Each priority event receives:
+
+```text
+priority_tier: high
+priority_reason: high_motion_residual_candidate
+human_review_result: null
+```
+
+## Priority queue ranking
+
+The priority queue is ranked by `motion_score` in descending order.
+
+This means the largest local frame-delta residual candidates appear first.
+
+This ranking is intentionally simple for V3. It is not a final anomaly score. Future versions should rank by a weighted combination of motion score, residual score, object locality, duration, track consistency, and manual-review feedback.
 
 ## Residual score
 
